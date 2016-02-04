@@ -40,6 +40,7 @@
   "dependencies": {
     "history": "^2.0.0-rc3",
     "invariant": "^2.0.0",
+    "path-browserify": "0.0.0",
     "warning": "^2.0.0"
   },
   "devDependencies": {

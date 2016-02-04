@@ -24,7 +24,7 @@ class User extends React.Component {
       <div className="User">
         <h1>User id: {userID}</h1>
         <ul>
-          <li><Link to={`/user/${userID}/tasks/foo`} activeClassName="active">foo task</Link></li>
+          <li><Link to="tasks/foo" activeClassName="active">foo task</Link></li>
           <li><Link to={`/user/${userID}/tasks/bar`} activeClassName="active">bar task</Link></li>
         </ul>
         {this.props.children}
@@ -41,6 +41,8 @@ class Task extends React.Component {
       <div className="Task">
         <h2>User ID: {userID}</h2>
         <h3>Task ID: {taskID}</h3>
+        <p>
+        </p>
       </div>
     )
   }

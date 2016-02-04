@@ -1,7 +1,32 @@
 import React from 'react'
 import warning from './warning'
+import { resolve } from 'path-browserify'
+import { formatPattern } from './PatternUtils'
 
 const { bool, object, string, func, oneOfType } = React.PropTypes
+
+function isAbsolute(loc) {
+  return loc.pathname.match(/^\//)
+}
+
+function constructRoutePattern(route, routes) {
+  let pathname = ''
+  for (let i = 0, l = routes.length; i < l; i++) {
+    if (routes[i] === route) {
+      break
+    } else {
+      pathname += routes[i].path
+    }
+  }
+  pathname += route.path
+  return pathname
+}
+
+function resolvePathname(relativePath, location, route, routes, params) {
+  const patternUpToRoute = constructRoutePattern(route, routes)
+  const resolvedPattern = resolve(patternUpToRoute, relativePath)
+  return formatPattern(resolvedPattern, params)
+}
 
 function isLeftClickEvent(event) {
   return event.button === 0
@@ -22,9 +47,11 @@ function isEmptyObject(object) {
 function createLocationDescriptor(to, { query, hash, state }) {
   if (query || hash || state) {
     return { pathname: to, query, hash, state }
+  } else if (typeof to === 'string') {
+    return { pathname: to }
+  } else {
+    return to
   }
-
-  return to
 }
 
 /**
@@ -95,10 +122,20 @@ const Link = React.createClass({
 
     if (allowTransition) {
       const { to, query, hash, state } = this.props
-      const location = createLocationDescriptor(to, { query, hash, state })
+      const location = this.resolveLocation(
+        createLocationDescriptor(to, { query, hash, state })
+      )
 
       this.context.router.push(location)
     }
+  },
+
+  resolveLocation(loc) {
+    if (!isAbsolute(loc)) {
+      const { routes, route, location, params } = this.context.router
+      loc.pathname = resolvePathname(loc.pathname, location, route, routes, params)
+    }
+    return loc
   },
 
   render() {
@@ -112,7 +149,9 @@ const Link = React.createClass({
     const { router } = this.context
 
     if (router) {
-      const location = createLocationDescriptor(to, { query, hash, state })
+      const location = this.resolveLocation(
+        createLocationDescriptor(to, { query, hash, state })
+      )
       props.href = router.createHref(location)
 
       if (activeClassName || (activeStyle != null && !isEmptyObject(activeStyle))) {

@@ -8,6 +8,29 @@ import warning from './warning'
 
 const { array, func, object } = React.PropTypes
 
+const RouteContext = React.createClass({
+  contextTypes: {
+    router: object.isRequired
+  },
+
+  childContextTypes: {
+    router: object
+  },
+
+  getChildContext() {
+    return {
+      router: {
+        ...this.context.router,
+        route: this.props.route
+      }
+    }
+  },
+
+  render() {
+    return React.Children.only(this.props.children)
+  }
+})
+
 /**
  * A <RouterContext> renders the component tree for a given router state
  * and sets the history object and the current location in context.
@@ -37,26 +60,33 @@ const RouterContext = React.createClass({
   },
 
   getChildContext() {
-    let { router, history, location } = this.props
+    let { router, history, location, routes, params } = this.props
     if (!router) {
       warning(false, '`<RouterContext>` expects a `router` rather than a `history`')
-
       router = {
         ...history,
+        location,
+        routes,
+        params,
         setRouteLeaveHook: history.listenBeforeLeavingRoute
       }
       delete router.listenBeforeLeavingRoute
     }
 
-    if (__DEV__) {
-      location = deprecateObjectProperties(location, '`context.location` is deprecated, please use a route component\'s `props.location` instead. http://tiny.cc/router-accessinglocation')
-    }
-
-    return { history, location, router }
+    const routerWithExtras = { ...router, location, routes, params }
+    return { history, location, router: routerWithExtras }
   },
 
   createElement(component, props) {
-    return component == null ? null : this.props.createElement(component, props)
+    if (component == null)
+      return null
+    else
+      return (
+        <RouteContext
+          route={props.route}
+          children={this.props.createElement(component, props)}
+        />
+      )
   },
 
   render() {
