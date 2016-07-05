@@ -1,68 +1,70 @@
 {
-  "name": "react-router",
-  "version": "0.13.5",
-  "description": "A complete routing library for React.js",
-  "main": "modules",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/rackt/react-router.git"
-  },
-  "homepage": "https://github.com/rackt/react-router/blob/latest/README.md",
-  "bugs": "https://github.com/rackt/react-router/issues",
-  "scripts": {
-    "build": "scripts/build.sh",
-    "examples": "webpack-dev-server --config examples/webpack.config.js --content-base examples",
-    "test": "jsxhint modules && karma start",
-    "build-website": "babel-node website/scripts/build.js > website/index.html"
-  },
-  "authors": [
-    "Ryan Florence",
-    "Michael Jackson"
-  ],
-  "license": "MIT",
-  "devDependencies": {
-    "babel": "^5.0.12",
-    "babel-core": "^5.0.12",
-    "babel-loader": "^5.0.0",
-    "bundle-loader": "^0.5.2",
-    "events": "1.0.2",
-    "expect": "^1.1.0",
-    "jsxhint": "^0.12.1",
-    "karma": "^0.13.9",
-    "karma-chrome-launcher": "^0.1.7",
-    "karma-cli": "0.0.4",
-    "karma-firefox-launcher": "^0.1.3",
-    "karma-mocha": "^0.1.10",
-    "karma-sourcemap-loader": "^0.3.2",
-    "karma-webpack": "^1.3.1",
-    "marked": "0.3.3",
-    "mocha": "^2.0.1",
-    "pygmentize-bundled": "^2.3.0",
-    "react": "0.14.x",
-    "rf-changelog": "^0.4.0",
-    "rx": "2.3.18",
-    "webpack": "^1.4.13",
-    "webpack-dev-server": "^1.6.6"
-  },
-  "peerDependencies": {
-    "react": "0.13.x||0.14.x"
-  },
-  "dependencies": {
-    "can-use-dom": "0.1.0",
-    "invariant": "^2.0.0",
-    "object-assign": "^2.0.0",
-    "qs": "2.4.1"
-  },
-  "tags": [
-    "react",
-    "router"
-  ],
-  "keywords": [
-    "react",
-    "react-component",
-    "routing",
-    "route",
-    "routes",
-    "router"
-  ]
+   "name":"react-router",
+   "version":"0.13.5",
+   "description":"A complete routing library for React.js",
+   "main":"modules",
+   "repository":{
+      "type":"git",
+      "url":"https://github.com/rackt/react-router.git"
+   },
+   "homepage":"https://github.com/rackt/react-router/blob/latest/README.md",
+   "bugs":"https://github.com/rackt/react-router/issues",
+   "scripts":{
+      "build":"scripts/build.sh",
+      "examples":"webpack-dev-server --config examples/webpack.config.js --content-base examples",
+      "test":"jsxhint modules && karma start",
+      "build-website":"babel-node website/scripts/build.js > website/index.html"
+   },
+   "authors":[
+      "Ryan Florence",
+      "Michael Jackson"
+   ],
+   "license":"MIT",
+   "devDependencies":{
+      "babel":"^5.0.12",
+      "babel-core":"^5.0.12",
+      "babel-loader":"^5.0.0",
+      "bundle-loader":"^0.5.2",
+      "events":"1.0.2",
+      "expect":"^1.1.0",
+      "jsxhint":"^0.12.1",
+      "karma":"^0.13.9",
+      "karma-chrome-launcher":"^0.1.7",
+      "karma-cli":"0.0.4",
+      "karma-firefox-launcher":"^0.1.3",
+      "karma-mocha":"^0.1.10",
+      "karma-sourcemap-loader":"^0.3.2",
+      "karma-webpack":"^1.3.1",
+      "marked":"0.3.3",
+      "mocha":"^2.0.1",
+      "pygmentize-bundled":"^2.3.0",
+      "react":"^15.0.1",
+      "react-addons-test-utils":"^15.0.1",
+      "react-dom":"^15.0.1",
+      "rf-changelog":"^0.4.0",
+      "rx":"2.3.18",
+      "webpack":"^1.4.13",
+      "webpack-dev-server":"^1.6.6"
+   },
+   "peerDependencies":{
+      "react":"0.13.x || 0.14.x || ^15.0.1"
+   },
+   "dependencies":{
+      "can-use-dom":"0.1.0",
+      "invariant":"^2.0.0",
+      "object-assign":"^2.0.0",
+      "qs":"2.4.1"
+   },
+   "tags":[
+      "react",
+      "router"
+   ],
+   "keywords":[
+      "react",
+      "react-component",
+      "routing",
+      "route",
+      "routes",
+      "router"
+   ]
 }

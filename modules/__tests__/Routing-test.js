@@ -2,6 +2,7 @@ var expect = require('expect');
 var React = require('react');
 var Router = require('../index');
 var Route = require('../components/Route');
+var ReactDOMServer = require('react-dom/server');
 var { Foo, Bar, Nested } = require('../TestUtils');
 
 describe('creating routes from ReactChildren', function () {
@@ -14,7 +15,7 @@ describe('creating routes from ReactChildren', function () {
     ];
 
     Router.run(routes, '/foo', function (Handler, state) {
-      var html = React.renderToString(<Handler/>);
+      var html = ReactDOMServer.renderToString(<Handler/>);
       expect(html).toMatch(/Foo/);
       done();
     });
@@ -29,7 +30,7 @@ describe('creating routes from ReactChildren', function () {
     ];
 
     Router.run(routes, '/bar', function (Handler, state) {
-      var html = React.renderToString(<Handler/>);
+      var html = ReactDOMServer.renderToString(<Handler/>);
       expect(html).toMatch(/Bar/);
       done();
     });

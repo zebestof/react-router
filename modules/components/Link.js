@@ -1,5 +1,5 @@
 var React = require('react');
-var assign = require('react/lib/Object.assign');
+var assign = require('object-assign');
 var PropTypes = require('../PropTypes');
 
 function isLeftClickEvent(event) {
@@ -82,6 +82,11 @@ class Link extends React.Component {
 
     if (props.activeStyle && this.getActiveState())
       props.style = props.activeStyle;
+
+    delete props.params;
+    delete props.query;
+    delete props.activeClassName;
+    delete props.activeStyle;
 
     return React.DOM.a(props, this.props.children);
   }

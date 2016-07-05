@@ -1,6 +1,7 @@
 var expect = require('expect');
 var React = require('react');
 var Router = require('../../index');
+var ReactDOMServer = require('react-dom/server');
 var DefaultRoute = require('../DefaultRoute');
 var Route = require('../Route');
 var { Foo, Nested } = require('../../TestUtils');
@@ -15,7 +16,7 @@ describe('DefaultRoute', function () {
     );
 
     Router.run(routes, '/', function (App) {
-      var html = React.renderToString(<App/>);
+      var html = ReactDOMServer.renderToString(<App/>);
       expect(html).toMatch(/Nested/);
       expect(html).toMatch(/Foo/);
     });
@@ -31,7 +32,7 @@ describe('DefaultRoute', function () {
     );
 
     Router.run(routes, '/foo', function (App) {
-      var html = React.renderToString(<App/>);
+      var html = ReactDOMServer.renderToString(<App/>);
       expect(html).toMatch(/Nested/);
       expect(html).toMatch(/Foo/);
     });
@@ -46,7 +47,7 @@ describe('DefaultRoute', function () {
       );
 
       Router.run(routes, '/', function (App) {
-        var html = React.renderToString(<App/>);
+        var html = ReactDOMServer.renderToString(<App/>);
         expect(html).toMatch(/Nested/);
         expect(html).toMatch(/Foo/);
       });

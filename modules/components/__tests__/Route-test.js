@@ -4,6 +4,7 @@ var Router = require('../../index');
 var DefaultRoute = require('../DefaultRoute');
 var Route = require('../Route');
 var { Foo, Bar } = require('../../TestUtils');
+var ReactDOMServer = require('react-dom/server');
 
 describe('Route', function () {
 
@@ -16,7 +17,7 @@ describe('Route', function () {
     );
 
     Router.run(routes, '/', function (App) {
-      var html = React.renderToString(<App/>);
+      var html = ReactDOMServer.renderToString(<App/>);
       expect(html).toMatch(/Foo/);
     });
   });
@@ -30,7 +31,7 @@ describe('Route', function () {
     );
 
     Router.run(routes, '/bar', function (App) {
-      var html = React.renderToString(<App/>);
+      var html = ReactDOMServer.renderToString(<App/>);
       expect(html).toMatch(/Bar/);
     });
   });
